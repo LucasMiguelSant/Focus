@@ -14,6 +14,7 @@ body {
   padding: 20px;
   background: var(--bg-main);
   color: var(--card-text);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* ---- Paleta Pastel Suave (light) ---- */
@@ -28,16 +29,16 @@ body.light-mode {
   --btn-delete: #f28482;
 }
 
-/* ---- Paleta Minimalista Oscura (dark) ---- */
+/* ---- Paleta Oscura Morado Eléctrico ---- */
 body.dark-mode {
-  --bg-main: #1a1a2e;
-  --text-title: #eaeaea;
-  --btn-active: #9d4edd;
-  --btn-hover: #7b2cbf;
-  --card-bg: #22223b;
-  --card-text: #f2e9e4;
-  --btn-complete: #06d6a0;
-  --btn-delete: #ef476f;
+  --bg-main: #1a1a2e;       /* azul‑negro profundo */
+  --text-title: #eaeaea;    /* gris muy claro */
+  --btn-active: #9d4edd;    /* morado eléctrico */
+  --btn-hover: #7b2cbf;     /* morado intenso */
+  --card-bg: #22223b;       /* gris‑azulado oscuro */
+  --card-text: #f2e9e4;     /* beige claro */
+  --btn-complete: #06d6a0;  /* verde turquesa */
+  --btn-delete: #ef476f;    /* rojo vibrante */
 }
 
 /* ---- Contenedor principal ---- */
@@ -53,9 +54,10 @@ body.dark-mode {
   justify-content: space-between;
   position: relative;
   background: var(--btn-active);
-  color: #fff;
+  color: var(--text-title);
   padding: 16px;
   border-radius: 8px 8px 0 0;
+  transition: background 0.3s ease;
 }
 
 .app-title {
@@ -66,46 +68,60 @@ body.dark-mode {
   color: var(--text-title);
 }
 
-/* Toggle de tema pegado a la derecha */
 .theme-toggle {
-  position: absolute;
-  right: 16px;
+    position: fixed;
+    top: 20px;
+    right: 0px;
+    z-index: 100;
+    padding: 5px;
 }
 
-/* Estilo del switch */
+
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 40px;
-  height: 20px;
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
 }
+
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
+
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
-  border-radius: 20px;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: background-color 0.4s ease;
 }
+
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 14px; width: 14px;
-  left: 3px; bottom: 3px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .4s;
 }
-.switch input:checked + .slider {
-  background-color: var(--btn-active);
+
+input:checked + .slider {
+    background-color: #30304d;
 }
-.switch input:checked + .slider:before {
-  transform: translateX(20px);
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+    background-color: transparent;
+    box-shadow: inset -6px 0 0 0 white;
 }
 
 /* ---- Widget ---- */
@@ -116,6 +132,7 @@ body.dark-mode {
   margin-top: 20px;
   padding: 16px;
   color: var(--card-text);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .widget-title {
@@ -123,7 +140,6 @@ body.dark-mode {
   font-size: 1.4em;
   font-weight: bold;
   margin-bottom: 12px;
-  position: relative;
   color: var(--text-title);
 }
 
@@ -134,7 +150,6 @@ body.dark-mode {
   gap: 8px;
   margin-bottom: 16px;
 }
-
 .view-btn {
   background: var(--btn-active);
   color: #fff;
@@ -145,24 +160,10 @@ body.dark-mode {
   cursor: pointer;
   transition: background 0.2s ease;
 }
-.view-btn:hover {
-  background: var(--btn-hover);
-}
+.view-btn:hover { background: var(--btn-hover); }
 .view-btn.active {
   background: var(--text-title);
   color: var(--bg-main);
-}
-
-/* ---- Contenido del widget ---- */
-.widget-content {
-  padding: 12px;
-}
-
-/* ---- Vista Día ---- */
-.empty {
-  text-align: center;
-  color: #777;
-  padding: 20px;
 }
 
 /* ---- Vista Semana ---- */
@@ -184,14 +185,10 @@ body.dark-mode {
   border: 2px solid var(--btn-active);
   background: var(--btn-hover);
 }
-.day-label {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
+.day-label { font-weight: bold; margin-bottom: 4px; }
 .dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   background: var(--btn-active);
   border-radius: 50%;
   margin: 2px;
@@ -222,22 +219,25 @@ body.dark-mode {
   border: 2px solid var(--btn-active);
   background: var(--btn-hover);
 }
-.day-number {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
+.day-number { font-weight: bold; margin-bottom: 4px; }
 
-/* ---- Hover en Semana/Mes ---- */
+/* ---- Hover extendido ---- */
 .day-cell:hover, .month-cell:hover {
   transform: scale(1.05);
   z-index: 20;
   background: var(--card-bg);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
   text-align: left;
+  border: 2px solid var(--btn-active);
 }
-.day-cell:hover .dot,
-.month-cell:hover .dot {
-  display: none;
+.day-cell:hover .day-label,
+.month-cell:hover .day-number { display: none; }
+.day-cell .task-list,
+.month-cell .task-list { display: none; }
+.day-cell:hover .task-list,
+.month-cell:hover .task-list {
+  display: block;
+  margin-top: 8px;
 }
 
 /* ---- Tarjetas de tarea ---- */
@@ -251,9 +251,10 @@ body.dark-mode {
   margin-top: 4px;
   font-size: 0.85em;
   color: var(--card-text);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 .task-title { font-weight: bold; }
-.task-note { font-size: 0.75em; color: #555; }
+.task-note { font-size: 0.75em; color: var(--card-text); }
 .task-actions { display: flex; gap: 4px; align-items: center; }
 .task-time { font-size: 0.8em; color: var(--btn-active); }
 .btn-mini {
@@ -263,40 +264,34 @@ body.dark-mode {
   border-radius: 4px;
   cursor: pointer;
 }
-.complete-btn {
-  background: var(--btn-complete);
-  color: #fff;
-}
-.delete-btn {
-  background: var(--btn-delete);
-  color: #fff;
-}
+.complete-btn { background: var(--btn-complete); color: #fff; }
+.delete-btn { background: var(--btn-delete); color: #fff; }
 
 /* ---- Formulario de nueva tarea ---- */
 #nueva-tarea {
   padding: 12px;
-  background: #fff;
-  border-top: 1px solid #ddd;
+  background: var(--card-bg);
+  border-top: 1px solid var(--btn-hover);
   margin-top: 20px;
+  color: var(--card-text);
 }
 #nueva-tarea.hidden { display: none; }
 #taskForm label {
   display: block;
   margin-top: 8px;
   font-weight: bold;
+  color: var(--text-title);
 }
 #taskForm input, #taskForm textarea, #taskForm select {
   width: 100%;
   padding: 6px;
   margin-top: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--btn-hover);
   border-radius: 4px;
+  background: var(--bg-main);
+  color: var(--card-text);
 }
-.time-picker {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
+.time-picker { display: flex; align-items: center; gap: 4px; }
 #taskForm button {
   margin-top: 12px;
   padding: 8px 12px;
@@ -305,18 +300,9 @@ body.dark-mode {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-}
-.day-cell:hover .day-label,
-.month-cell:hover .day-number {
-  display: none;
-}
-.day-cell .task-list,
-.month-cell .task-list {
-  display: none;
-}
-.day-cell:hover .task-list,
-.month-cell:hover .task-list {
-  display: block;
-  margin-top: 8px;
+  transition: background 0.3s ease;
 }
 
+#taskForm button:hover {
+  background: var(--btn-hover);
+}
