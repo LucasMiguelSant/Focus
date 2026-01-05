@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus</title>
+    <link rel="stylesheet" href="Focus.css">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+
+<main class="app-container">
+
+    <!-- Encabezado -->
+    <header class="app-header">
+        <h1 class="app-title">Focus</h1>
+        <div class="theme-toggle">
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </header>
+
+    <!-- Widget -->
+    <section id="widget" class="widget">
+        <h2 class="widget-title">Widget</h2>
+        <div class="widget-controls">
+            <button class="view-btn" data-view="dia">Día</button>
+            <button class="view-btn" data-view="semana">Semana</button>
+            <button class="view-btn" data-view="mes">Mes</button>
+        </div>
+        <div id="widget-content" class="widget-content">
+            <!-- Aquí se renderizan las tareas -->
+        </div>
+    </section>
+<section id="nueva-tarea" class="hidden">
+  <h2>Nueva tarea</h2>
+  <form id="taskForm">
+    <label>Título</label>
+    <input type="text" id="titulo" required>
+
+    <label>Nota (opcional)</label>
+    <textarea id="nota"></textarea>
+
+    <label>Fecha</label>
+    <input type="date" id="fecha" required>
+
+    <label>Hora</label>
+    <div class="time-picker">
+    <input type="number" id="hora" min="1" max="12" placeholder="hh" required>
+    <span>:</span>
+    <input type="number" id="minuto" min="0" max="59" placeholder="mm" required>
+    <select id="ampm">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+    </select>
+    </div>
+
+
+    <label>
+      <input type="checkbox" id="alarma"> Activar alarma
+    </label>
+
+    <label>Repetición (opcional)</label>
+    <input type="number" id="intervalo" min="1" placeholder="Cada X días">
+
+    <button type="submit">Guardar</button>
+  </form>
+</section>
+
+</main>
+    <script src="Focus.js"></script>
+</body>
+</html>
+
+
