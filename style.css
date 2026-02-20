@@ -43,7 +43,7 @@ body.dark-mode {
 
 /* ---- Contenedor principal ---- */
 .app-container {
-  width: 100%;
+  width: 80%;
   max-width: 800px;
 }
 
@@ -306,3 +306,4 @@ input:checked + .slider:before {
 #taskForm button:hover {
   background: var(--btn-hover);
 }
+
