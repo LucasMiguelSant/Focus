@@ -307,3 +307,11 @@ input:checked + .slider:before {
   background: var(--btn-hover);
 }
 
+@media (max-width: 400px) {
+    .day-cell{
+      padding: 0;
+    }
+    .month-cell{
+      padding: 0;
+    }
+}
