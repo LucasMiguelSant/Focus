@@ -43,16 +43,6 @@ function isPending(t, iso = hoyISO()) {
   }
   return diffDays >= 0 && diffDays % (t.intervalo + 1) === 0;
 }
-
-// ---- Datos iniciales demo ----
-if (!localStorage.getItem(STORAGE_KEY)) {
-  saveTasks([
-    { id: 1, titulo: "Reunión con equipo", nota: "Traer informe", fecha: hoyISO(), hora: "2:30 PM", alarma: true, completada: false, intervalo: null, excepciones: [], modificaciones: {} },
-    { id: 2, titulo: "Ejercicio", nota: "30 min", fecha: hoyISO(), hora: "6:00 PM", alarma: false, completada: false, intervalo: null, excepciones: [], modificaciones: {} },
-    { id: 3, titulo: "Comprar regalos", nota: "Sin hora", fecha: hoyISO(), hora: null, alarma: true, completada: false, intervalo: null, excepciones: [], modificaciones: {} }
-  ]);
-}
-
 // ---- Referencias ----
 const widget = document.getElementById("widget");
 const content = document.getElementById("widget-content");
@@ -346,3 +336,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   render();
 });
+
