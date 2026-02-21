@@ -21,7 +21,7 @@ body.light-mode {
   --bg-main: #fdf6f0;
   --text-title: #6d6875;
   --btn-active: #ffb4a2;
-  --btn-hover: #e33339;
+  --btn-hover: ##ff967b;;
   --card-bg: #f8edeb;
   --card-text: #444;
   --btn-complete: #84a59d;
@@ -68,7 +68,7 @@ body.dark-mode {
 }
 
 .theme-toggle {
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 0px;
     z-index: 100;
@@ -310,17 +310,23 @@ input:checked + .slider:before {
 #taskForm button:hover {
   background: var(--btn-hover);
 }
-@media (max-width: 400px) {
+.day-cell,.month-cell{
+min-height: 60px;
+}
+@media(max-width:600px){
+    .month-grid, .week-grid {
+    grid-template-columns: repeat(6, 1fr); /* siempre 4 columnas */
+  }
+}
+@media(max-width:530px){
+    .month-grid, .week-grid {
+    grid-template-columns: repeat(5, 1fr); /* siempre 4 columnas */
+  }
+}
+@media (max-width: 450px) {
   .month-grid, .week-grid {
     grid-template-columns: repeat(4, 1fr); /* siempre 4 columnas */
   }
-
-  .day-cell, .month-cell {
-    position: relative; /* cada celda es el contenedor de referencia */
-    overflow: visible;  /* permitir que el overlay salga */
-  }
-
-  /* Solo mostrar overlay si hay tareas */
   .day-cell.has-tasks:hover .task-list,
   .month-cell.has-tasks:hover .task-list {
     display: block;
@@ -334,11 +340,11 @@ input:checked + .slider:before {
     word-wrap: break-word;
     max-width: 250px;
   }
-  body{
-    justify-content: left;
-    padding-left: 0px;
+  .theme-toggle{
+    top:40px;
+    right: 50px;
   }
-
+  .day-cell,.month-cell{
+    min-height: none;
+  }
 }
-
-
