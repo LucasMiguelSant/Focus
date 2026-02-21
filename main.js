@@ -39,10 +39,11 @@ function isPending(t, iso = hoyISO()) {
     return t.fecha === iso;
   }
   if (t.intervalo === 0) {
-    return diffDays >= 0;
+    return t.fecha === iso; // sin repeticiones
   }
-  return diffDays >= 0 && diffDays % (t.intervalo + 1) === 0;
+  return diffDays >= 0 && diffDays % t.intervalo === 0;
 }
+
 // ---- Referencias ----
 const widget = document.getElementById("widget");
 const content = document.getElementById("widget-content");
@@ -159,7 +160,6 @@ function taskCardHTML(t, iso) {
         ${hora ? `<span class="task-time">${hora}</span>` : ``}
         <button class="btn-mini complete-btn">Hecho</button>
         <button class="btn-mini delete-btn">Borrar</button>
-        <button class="btn-mini edit-btn">✎</button>
       </div>
     </div>
   `;
@@ -173,7 +173,6 @@ function attachTaskActions(list, isoOverride = null) {
 
     const complete = card.querySelector(".complete-btn");
     const del = card.querySelector(".delete-btn");
-    const edit = card.querySelector(".edit-btn");
 
     complete?.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -194,26 +193,6 @@ function attachTaskActions(list, isoOverride = null) {
       if (idx >= 0) {
         tasks[idx].excepciones = tasks[idx].excepciones || [];
         tasks[idx].excepciones.push(iso);
-        saveTasks(tasks);
-        render();
-      }
-    });
-
-    edit?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const nuevoTitulo = prompt("Nuevo título:", t.titulo);
-      const nuevoNota = prompt("Nueva nota:", t.nota);
-      const nuevoHora = prompt("Nueva hora (ej: 7:00 AM):", t.hora);
-
-      const tasks = loadTasks();
-      const idx = tasks.findIndex(t => t.id === id);
-      if (idx >= 0) {
-        tasks[idx].modificaciones = tasks[idx].modificaciones || {};
-        tasks[idx].modificaciones[iso] = {
-          titulo: nuevoTitulo || t.titulo,
-          nota: nuevoNota || t.nota,
-          hora: nuevoHora || t.hora
-        };
         saveTasks(tasks);
         render();
       }
@@ -265,7 +244,7 @@ if (taskForm) {
 
     // Hora en formato AM/PM
     const horaRaw = document.getElementById("hora")?.value?.trim();
-    const minutoRaw = document.getElementById("minuto")?.value?.trim();
+    const minutoRaw = document.getElement
     const ampm = document.getElementById("ampm")?.value;
     let horaFinal = null;
     if (horaRaw && minutoRaw && ampm) {
@@ -273,7 +252,6 @@ if (taskForm) {
       horaFinal = `${horaRaw}:${minuto} ${ampm}`;
     }
 
-    const alarma = document.getElementById("alarma")?.checked || false;
     const intervaloRaw = document.getElementById("intervalo")?.value;
     const intervalo = intervaloRaw !== "" ? Number(intervaloRaw) : null;
 
@@ -286,7 +264,6 @@ if (taskForm) {
       nota,
       fecha,
       hora: horaFinal,
-      alarma,
       intervalo,
       completada: false,
       excepciones: [],
@@ -318,7 +295,7 @@ function bindDayClicks() {
   if (!content) return;
 
   content.addEventListener("click", (e) => {
-    if (e.target.closest(".complete-btn, .delete-btn, .edit-btn")) return;
+    if (e.target.closest(".complete-btn, .delete-btn")) return;
     const cell = e.target.closest(".day-cell[data-date], .month-cell[data-date]");
     if (!cell) return;
     abrirFormulario(cell.dataset.date);
@@ -336,4 +313,3 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   render();
 });
-
