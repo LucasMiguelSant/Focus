@@ -1,4 +1,4 @@
-/* ---- Reset básico ---- */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -341,3 +341,4 @@ input:checked + .slider:before {
   }
 
 }
+
