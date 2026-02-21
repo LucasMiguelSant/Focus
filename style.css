@@ -342,9 +342,10 @@ min-height: 60px;
   }
   .theme-toggle{
     top:40px;
-    right: 50px;
+    right: 60px;
   }
   .day-cell,.month-cell{
     min-height: none;
   }
 }
+
