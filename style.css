@@ -22,7 +22,7 @@ body.light-mode {
   --bg-main: #fdf6f0;
   --text-title: #6d6875;
   --btn-active: #ffb4a2;
-  --btn-hover: #e5989b;
+  --btn-hover: #e33339;
   --card-bg: #f8edeb;
   --card-text: #444;
   --btn-complete: #84a59d;
@@ -34,7 +34,7 @@ body.dark-mode {
   --bg-main: #1a1a2e;       /* azul‑negro profundo */
   --text-title: #eaeaea;    /* gris muy claro */
   --btn-active: #9d4edd;    /* morado eléctrico */
-  --btn-hover: #7b2cbf;     /* morado intenso */
+  --btn-hover: #58099c;     /* morado intenso */
   --card-bg: #22223b;       /* gris‑azulado oscuro */
   --card-text: #f2e9e4;     /* beige claro */
   --btn-complete: #06d6a0;  /* verde turquesa */
@@ -183,7 +183,7 @@ input:checked + .slider:before {
 }
 .day-cell.today {
   border: 2px solid var(--btn-active);
-  background: var(--btn-hover);
+  background: var(--card-bg);
 }
 .day-label { font-weight: bold; margin-bottom: 4px; }
 .dot {
@@ -217,7 +217,7 @@ input:checked + .slider:before {
 }
 .month-cell.today {
   border: 2px solid var(--btn-active);
-  background: var(--btn-hover);
+  background: var(--card-bg);
 }
 .day-number { font-weight: bold; margin-bottom: 4px; }
 
@@ -232,6 +232,7 @@ input:checked + .slider:before {
 }
 .day-cell:hover .day-label,
 .month-cell:hover .day-number { display: none; }
+.month-cell:hover .dot { display: none; }
 .day-cell .task-list,
 .month-cell .task-list { display: none; }
 .day-cell:hover .task-list,
@@ -244,7 +245,6 @@ input:checked + .slider:before {
 .task-card {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   background: var(--card-bg);
   border-radius: 6px;
   padding: 6px;
@@ -252,6 +252,11 @@ input:checked + .slider:before {
   font-size: 0.85em;
   color: var(--card-text);
   transition: background 0.3s ease, color 0.3s ease;
+  flex-direction: column;
+  align-items: flex-start;
+  white-space: normal;
+  word-wrap: break-word;
+
 }
 .task-title { font-weight: bold; }
 .task-note { font-size: 0.75em; color: var(--card-text); }
@@ -306,12 +311,33 @@ input:checked + .slider:before {
 #taskForm button:hover {
   background: var(--btn-hover);
 }
-
 @media (max-width: 400px) {
-    .day-cell{
-      padding: 0;
-    }
-    .month-cell{
-      padding: 0;
-    }
+  .month-grid, .week-grid {
+    grid-template-columns: repeat(4, 1fr); /* siempre 4 columnas */
+  }
+
+  .day-cell, .month-cell {
+    position: relative; /* cada celda es el contenedor de referencia */
+    overflow: visible;  /* permitir que el overlay salga */
+  }
+
+  /* Solo mostrar overlay si hay tareas */
+  .day-cell.has-tasks:hover .task-list,
+  .month-cell.has-tasks:hover .task-list {
+    display: block;
+    position: absolute;
+    top: 0;
+    background: var(--card-bg);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    border: 2px solid var(--btn-active);
+    border-radius: 6px;
+    padding: 8px;
+    word-wrap: break-word;
+    max-width: 250px;
+  }
+  body{
+    justify-content: left;
+    padding-left: 0px;
+  }
+
 }
